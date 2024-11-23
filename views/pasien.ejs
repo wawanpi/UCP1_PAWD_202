@@ -1,0 +1,22 @@
+<!-- views/patients.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Pasien</title>
+</head>
+<body>
+    <h1>Daftar Pasien</h1>
+    <a href="/patients/add">Tambah Pasien</a>
+    <ul>
+        <% patients.forEach(function(patient) { %>
+            <li>
+                <%= patient.name %> - <%= patient.age %> - <%= patient.gender %> - <%= patient.contact %>
+                <a href="/patients/edit/<%= patient.id %>">Edit</a>
+                <a href="/patients/delete/<%= patient.id %>">Hapus</a>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

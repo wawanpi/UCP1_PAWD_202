@@ -1,0 +1,22 @@
+<!-- views/doctors.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Dokter</title>
+</head>
+<body>
+    <h1>Daftar Dokter</h1>
+    <a href="/doctors/add">Tambah Dokter</a>
+    <ul>
+        <% doctors.forEach(function(doctor) { %>
+            <li>
+                <%= doctor.name %> - <%= doctor.specialization %> - <%= doctor.contact %>
+                <a href="/doctors/edit/<%= doctor.id %>">Edit</a>
+                <a href="/doctors/delete/<%= doctor.id %>">Hapus</a>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

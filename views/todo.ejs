@@ -1,0 +1,65 @@
+<div class="container mt-5">
+    <h1 class="text-center">Manage Patients and Doctors</h1>
+
+    <!-- Form to Add New Patient or Doctor -->
+    <form id="addEntityForm" class="my-4" action="/add-entity" method="POST">
+        <div class="form-group">
+            <label for="entityType">Entity Type</label>
+            <select id="entityType" name="entityType" class="form-control" required>
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+            </select>
+        </div>
+        <div class="form-group mt-3">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Enter name" required>
+        </div>
+        <div class="form-group mt-3">
+            <label for="specialty">Specialty</label>
+            <input type="text" id="specialty" name="specialty" class="form-control" placeholder="Enter specialty (Doctor only)">
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Add</button>
+    </form>
+
+    <!-- List of Entities -->
+    <ul id="entityList" class="list-group">
+        <% if (entities && entities.length > 0) { %>
+            <% entities.forEach(entity => { %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span><%= entity.name %> (<%= entity.type %>)</span>
+                    <div>
+                        <button class="btn btn-sm btn-success mr-2 editBtn" data-id="<%= entity.id %>">Edit</button>
+                        <button class="btn btn-sm btn-danger deleteBtn" data-id="<%= entity.id %>">Delete</button>
+                    </div>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <li class="list-group-item">No entities available</li>
+        <% } %>
+    </ul>
+
+    <!-- Edit Entity Modal -->
+    <div id="editModal" class="modal fade" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Entity</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editEntityForm">
+                        <div class="form-group">
+                            <label for="editName">Name</label>
+                            <input type="text" id="editName" class="form-control" required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="editSpecialty">Specialty</label>
+                            <input type="text" id="editSpecialty" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
